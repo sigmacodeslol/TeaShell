@@ -10,11 +10,11 @@ authors = [{ name = "Torrez Tsoi", email = "tcrrxzz@gmail.com" }]
 dependencies = []
 
 [tool.setuptools]
-packages = ["your_project"]
+packages = ["teashell"]
 
-[tool.setuptools.package-data]
-your_project = ["data/*.txt"]  # Include non-Python files in package
+# [tool.setuptools.package-data]
+# teashell = ["data/*.txt"]  # Include non-Python files in package
 
 [project.scripts]
-tsh = "your_project.cli:main"  # CLI command if needed
+tsh = "teashell.cli:main"  # CLI command if needed
 
