@@ -1,1 +1,2 @@
-
+logging:
+  logs_lim: 30
