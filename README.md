@@ -10,7 +10,7 @@ TeaShell (tsh) is a DIY shell terminal that provides a simple, customizable comm
 
 ```bash
 # Clone the repository
-git clone [repository URL]
+git clone https://github.com/sigmacodeslol/TeaShell
 cd teashell
 
 # Install dependencies
