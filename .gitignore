@@ -1,2 +1,5 @@
 project_structure.txt
+*.ps1
 __pycache__/
+tests/
+logs/
