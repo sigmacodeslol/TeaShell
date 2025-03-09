@@ -1,2 +1,2 @@
 logging:
-  logs_lim: 30
+  max_logs: 50
