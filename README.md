@@ -5,6 +5,7 @@ A custom, lightweight shell terminal built in Python 3.12.3.
 ## Overview
 
 TeaShell (tsh) is a DIY shell terminal that provides a simple, customizable command-line interface similar to PowerShell (pwsh). Built from scratch with Python, TeaShell offers features such as command aliasing.
+This is a personal project and not affiliated with any organizations or individuals.
 
 ## Installation
 
@@ -98,3 +99,7 @@ SOFTWARE.
 ## Acknowledgments
 
 - I was inspired by the Shell section in [Build Your Own X](https://github.com/codecrafters-io/build-your-own-x) because I always wanted to build my own shell but after weeks, all I could do is just implement simple tools like math functions and tools I could use but I have to go to my shell directory + run my self-coded project that I haven't paid much attention to lately.
+
+## Notes
+
+- I will add the functionality of files and folders soon in the future, probably after the version 1.0.0 official release.

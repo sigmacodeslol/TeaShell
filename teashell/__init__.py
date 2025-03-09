@@ -11,6 +11,9 @@ class TeaShell:
     def __call__(self) -> None:
         log = self.__log
         log(LWrite("msys", "initialized sys global vars", "init"))
+
+        
+
         log(LWrite("msys", "terminated shell", "exit"))
 
 
