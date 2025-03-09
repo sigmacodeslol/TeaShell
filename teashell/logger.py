@@ -41,6 +41,7 @@ class _LOG:
         if num_files >= config["logging"]["max_logs"]:
             cleanup(self._log_dir)
 
+        # write the log
         lw: LWrite = args[0]
         if Path(self._logfp).exists():
             with open(self._logfp, "a") as logf:
