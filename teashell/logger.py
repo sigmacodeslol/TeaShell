@@ -1,7 +1,8 @@
-from datetime import datetime
-from typing import Callable
 from dataclasses import dataclass
+from datetime import datetime
+import os
 from pathlib import Path
+from typing import Callable
 
 from _err import Terminate
 from config import config
@@ -26,7 +27,7 @@ class _LOG:
 
         current_dir = Path(__file__).parent
         self._log_dir = current_dir.parent / "logs"
-        self._logfp = str(log_dir / self._logf)
+        self._logfp = str(self._log_dir / self._logf)
 
     def __call__(self, mode: LWrite):
         if isinstance(mode, LWrite):
