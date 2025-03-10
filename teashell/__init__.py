@@ -1,18 +1,16 @@
+from config import config
 import logger
 from logger import LWrite
-
-# print(logger._LOG()(LWrite("msys", "initialized sys global vars", "init")))
 
 
 class TeaShell:
     def __init__(self) -> None:
-        self.__log = logger._LOG()
+        self.__log = logger._LOG(config)
 
     def __call__(self) -> None:
         log = self.__log
-        log(LWrite("msys", "initialized sys global vars", "init"))
-
-        
+        log(LWrite("msys", "initialized sys global vars", "init"))  # msys: main sys
+        log(LWrite("msys", "successfully printed teashell logo", "init"))
 
         log(LWrite("msys", "terminated shell", "exit"))
 
