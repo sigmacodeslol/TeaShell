@@ -1,6 +1,19 @@
+from typing import Callable
+
 from config import config
 import logger
 from logger import LWrite
+
+
+class _CMDdb:
+    def __init__(self) -> None:
+        self.__cmds: dict = {}
+
+    def register(self, cmd: str, func: Callable) -> None:
+        self.__cmds[cmd]: Callable = func
+
+    def remove(self, cmd: str) -> None:
+        self.__cmds.pop(cmd, None)
 
 
 class TeaShell:
