@@ -5,7 +5,6 @@ from pathlib import Path
 from typing import Callable
 
 from _err import Terminate
-from config import config
 from grhh import grhh
 from scripts.cleanup_logs import cleanup
 
@@ -20,7 +19,9 @@ class LWrite:
 class _LOG:
     """CANNOT HAVE MORE THAN ONE INSTANCE OF THIS CLASS"""
 
-    def __init__(self) -> None:
+    def __init__(self, _config) -> None:
+        self._config = _config
+
         now: str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         mod_strf: dict = {"now": now, "rhh": grhh(8), "ftype": "log"}
         self._logf: str = "%(now)s+%(rhh)s.%(ftype)s" % mod_strf
@@ -39,7 +40,7 @@ class _LOG:
         # empty the log folder if it has more than the max logs attr in config.yaml
         folder = self._log_dir
         num_files = sum(1 for entry in os.scandir(folder) if entry.is_file())
-        if num_files >= config["logging"]["max_logs"]:
+        if num_files > self._config["logging"]["max_logs"]:
             cleanup(self._log_dir)
 
         # write the log
