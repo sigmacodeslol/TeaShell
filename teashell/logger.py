@@ -37,7 +37,7 @@ class _LOG:
 
     def _write(self, *args, **kwargs):
         # empty the log folder if it has more than the max logs attr in config.yaml
-        folder = self._logf
+        folder = self._log_dir
         num_files = sum(1 for entry in os.scandir(folder) if entry.is_file())
         if num_files >= config["logging"]["max_logs"]:
             cleanup(self._log_dir)
