@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from datetime import datetime
 import os
 from pathlib import Path
@@ -6,14 +5,20 @@ from typing import Callable
 
 from _err import Terminate
 from grhh import grhh
+from stdfio import _Path
 from scripts.cleanup_logs import cleanup
 
 
-@dataclass
 class LWrite:
-    lfrom: str
-    lmsg: str
-    ltype: str
+    def __init__(self, lfrom: str, lmsg: str, ltype: str) -> None:
+        self.lfrom: str = lfrom
+        self.lmsg: str = lmsg
+        self.ltype: str = ltype
+
+        self._exitc: int = None
+
+    def exit(self, exitcode: int = 0) -> None:
+        self._exitc = exitcode
 
 
 class _LOG:
@@ -40,17 +45,27 @@ class _LOG:
         # empty the log folder if it has more than the max logs attr in config.yaml
         folder = self._log_dir
         num_files = sum(1 for entry in os.scandir(folder) if entry.is_file())
-        if num_files > self._config["logging"]["max_logs"]:
+        max_logs = self._config["logging"]["max_logs"]
+        if num_files > max_logs:
             cleanup(self._log_dir)
+            cleaned: bool = True
+        else:
+            cleaned: bool = False
 
         # write the log
         lw: LWrite = args[0]
-        if Path(self._logfp).exists():
-            with open(self._logfp, "a") as logf:
-                logf.write(f"\n({lw.lfrom})[{lw.ltype}]: {lw.lmsg}")
+        PATH = _Path(Path(self._logfp))
+        if PATH.path.exists():
+            PATH._append(f"\n({lw.lfrom})[{lw.ltype}]: {lw.lmsg}")
         else:
-            with open(self._logfp, "w") as logf:
-                logf.write(f"({lw.lfrom})[{lw.ltype}]: {lw.lmsg}")
+            if cleaned:
+                PATH._write(
+                    f"(logger)[cleanup]: cleaned logs folder (count: {max_logs + 1})"
+                )
+            PATH._write(f"({lw.lfrom})[{lw.ltype}]: {lw.lmsg}")
+
+        if lw._exitc is not None:
+            PATH._append(f"\n(logger)[exit]: {lw._exitc}")
 
 
 __all__ = ["_LOG", "LWrite"]
