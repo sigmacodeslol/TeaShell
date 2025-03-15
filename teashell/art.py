@@ -18,9 +18,10 @@ def format(text:str, font:str|None="lean", *, file=sys.stdout.write) -> Tuple[in
         Tuple[int, int]: (numpass, numfail)
     """
     try:
-        file(pyfiglet.figlet_format(text, width=90)
+        _w = 90
+        file(pyfiglet.figlet_format(text, width=_w)
              if(font is None)
-             else pyfiglet.figlet_format(text, font))
+             else pyfiglet.figlet_format(text, font, width=_w))
         return (1, 0)
     except:
         return (0, 1)
