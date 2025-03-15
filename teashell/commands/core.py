@@ -13,4 +13,5 @@ class _help:
     def __call__(self) -> None:
         print("Commands:")
         for cmd in self.cmds:
-            print(f"  {cmd}")
+            spcs = " " * (len(longest(self.cmds.keys())) - len(cmd))
+            print(f"  {cmd}{spcs} - {self.cmds[cmd]['desc']}")

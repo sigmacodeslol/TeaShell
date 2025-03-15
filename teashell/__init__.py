@@ -1,6 +1,7 @@
 from typing import Callable
 
 import art
+from color import Colors
 from commands import *
 from config import config
 import logger
@@ -21,7 +22,10 @@ class _CMDdb:
         self._log: logger._LOG = _log
 
     def register(self, cmd: str, func: Callable) -> None:
-        self._cmds[cmd]: Callable = func
+        self._cmds[cmd]: dict = {
+            "f": func,
+            "desc": func.__doc__,
+        }
 
     def remove(self, cmd: str) -> None:
         self._cmds.pop(cmd, None)
@@ -40,16 +44,17 @@ class TeaShell:
 
     def __call__(self) -> None:
         log = self.__log
+        log(LWrite("msys/init", "instantiated logs module", "INFO"))  # msys: main sys
+        log(LWrite("msys/init", "initialized sys global vars", "INFO"))
 
-        log(LWrite("msys", "initialized sys global vars", "init"))  # msys: main sys
-
-        check_errors = art.format("TeaSHell")
+        check_errors = art.format("Tea-SHell")
+        print(f"{Colors.DARK_GRAY}TeaShell{Colors.END}")
         if(check_errors[1] > 0):
-            log(LWrite("msys", "failed to print teashell logo", "init"))
+            log(LWrite("msys/init", "failed to print teashell logo", "ERROR"))
         else:
-            log(LWrite("msys", "successfully printed teashell logo", "init"))
+            log(LWrite("msys/init", "successfully printed teashell logo", "INFO"))
 
-        log(LWrite("msys", "terminated shell", "exit"))
+        log(LWrite("msys/exit", "terminated shell [code=0]", "INFO"))
 
 
 tsh = (
