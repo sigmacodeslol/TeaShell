@@ -1,6 +1,6 @@
 # TeaShell (tsh)
 
-A custom, lightweight shell terminal built in Python 3.12.3.
+A custom, lightweight shell terminal built in Python 3.12.3. Supports only windows as far as I know of.
 
 ## Overview
 
