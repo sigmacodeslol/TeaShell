@@ -1,2 +1,7 @@
 logging:
   max_logs: 100
+
+prompt:
+  format: '%(shell)s'
+  attr:
+    shell: 'tsh'
