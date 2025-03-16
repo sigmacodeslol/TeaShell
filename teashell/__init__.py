@@ -40,7 +40,9 @@ class TeaShell:
 
         self.__cmds = _CMDdb(self.__log)
         # cmd registers
+        self.__cmds.register(["clear", "cls"], core._clsscr())
         self.__cmds.register("help", core._help(self.__cmds._cmds))
+        self.__cmds.register("exit", None)
 
     def __call__(self) -> None:
         log = self.__log
@@ -53,6 +55,23 @@ class TeaShell:
             log(LWrite("msys/init", "failed to print teashell logo", "ERROR"))
         else:
             log(LWrite("msys/init", "successfully printed teashell logo", "INFO"))
+
+        prompt = ""
+        format_dict = {}
+        if("%(shell)s" in config["prompt"]):
+            format_dict["shell"] = "tsh"
+
+        terminate = False
+        while not terminate:
+            usr_in: str = get_input(prompt=(config["prompt"] % {"shell": ""})).strip().replace(",", "")
+            if usr_in == "":
+                continue
+            parsed = parse(usr_in, nonfunctypes=nonfunctypes)
+            cmd: str = parsed.cmd
+            args: list[str] = parsed.args
+            opts: list[str] = parsed.opts
+            cmdt: PXt = parsed.cmdType
+            ic(cmd, args, opts, cmdt)
 
         log(LWrite("msys/exit", "terminated shell [code=0]", "INFO"))
 

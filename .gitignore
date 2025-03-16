@@ -3,3 +3,4 @@ project_structure.txt
 __pycache__/
 tests/
 logs/
+tetris/
