@@ -56,14 +56,13 @@ class TeaShell:
         else:
             log(LWrite("msys/init", "successfully printed teashell logo", "INFO"))
 
-        prompt = ""
-        format_dict = {}
+        format_dict: dict = {}
         if("%(shell)s" in config["prompt"]):
             format_dict["shell"] = "tsh"
 
         terminate = False
         while not terminate:
-            usr_in: str = get_input(prompt=(config["prompt"] % {"shell": ""})).strip().replace(",", "")
+            usr_in: str = get_input(prompt=(config["prompt"] % format_dict)).strip().replace(",", "")
             if usr_in == "":
                 continue
             parsed = parse(usr_in, nonfunctypes=nonfunctypes)
